@@ -1,0 +1,99 @@
+{
+  "info": {
+    "name": "AI Job Outreach Agent",
+    "_postman_id": "a2db52d7-ec91-4e10-86b7-a1f5f8f5b001",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8082"
+    },
+    {
+      "key": "contactId",
+      "value": "1"
+    },
+    {
+      "key": "draftId",
+      "value": "1"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/health"
+      }
+    },
+    {
+      "name": "Save candidate profile",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fullName\": \"Your Full Name\",\n  \"headline\": \"Entry-Level Java Backend Developer\",\n  \"degree\": \"B.Tech CSE\",\n  \"graduationYear\": \"2025\",\n  \"skills\": \"Java, Spring Boot, REST APIs, MySQL, Hibernate/JPA\",\n  \"projects\": \"Describe your real projects here\",\n  \"preferredLocations\": \"Noida, Delhi NCR, Bengaluru\",\n  \"githubUrl\": \"https://github.com/yourusername\",\n  \"linkedinUrl\": \"https://linkedin.com/in/yourprofile\"\n}"
+        },
+        "url": "{{baseUrl}}/api/profile"
+      }
+    },
+    {
+      "name": "List contacts",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/contacts"
+      }
+    },
+    {
+      "name": "Create contact",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Recruiter Name\",\n  \"email\": \"recruiter@example.com\",\n  \"company\": \"Example Ltd\",\n  \"jobTitle\": \"Talent Acquisition\",\n  \"linkedinUrl\": \"\",\n  \"notes\": \"Verified recruiter contact\"\n}"
+        },
+        "url": "{{baseUrl}}/api/contacts"
+      }
+    },
+    {
+      "name": "Generate draft",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/drafts/generate/{{contactId}}"
+      }
+    },
+    {
+      "name": "List drafts",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/drafts"
+      }
+    },
+    {
+      "name": "Approve draft",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/drafts/{{draftId}}/approve"
+      }
+    },
+    {
+      "name": "Send approved draft",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/drafts/{{draftId}}/send"
+      }
+    }
+  ]
+}
